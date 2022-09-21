@@ -1,0 +1,3469 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="text/stylesheet" href="bootstrap">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+    <style>
+		table{border-collapse:collapse;border-spacing:0}
+		#myInput {
+  background-image: url('search-icon.png'); /* Add a search icon to input */
+  background-position: 10px 15px; /* Position the search icon */
+  background-size: 25px 25px;
+  background-repeat: no-repeat; /* Do not repeat the icon image */
+  width: 100%; /* Full-width */
+  font-size: 18px; /* Increase font-size */
+  padding: 12px 20px 12px 40px; /* Add some padding */
+  border: 1px solid #ddd; /* Add a grey border */
+  margin-bottom: 12px; /* Add some space below the input */
+}
+
+#myTable {
+  border-collapse: collapse; /* Collapse borders */
+  width: 100%; /* Full-width */
+  border: 1px solid #ddd; /* Add a grey border */
+  font-size: 18px; /* Increase font-size */
+}
+
+#myTable th, #myTable td {
+  text-align: left; /* Left-align text */
+  padding: 12px; /* Add padding */
+}
+
+#myTable tr {
+  /* Add a bottom border to all table rows */
+  border-bottom: 1px solid #ddd;
+}
+
+#myTable tr.header, #myTable tr:hover {
+  /* Add a grey background color to the table header and on hover */
+  background-color: #f1f1f1;
+}
+		</style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#"><h2>Digital Clock</h2></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active" id="h">
+                    <a class="nav-link" href="#" onclick="dispn()"><b> Home </b><span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item" id="t">
+                    <a class="nav-link" href="#" onclick="dispb()"><b> Time Zones </b></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+
+
+    <div class="container my-4" id="clk">
+        <div class="jumbotron">
+            <h1 class="display-4">Current time Is: <span id="time"></span></h1>
+            <p class="lead">We have got you covered. </p>
+            <hr class="my-4">
+            <p>We are here to show you the time for different countries</p>
+            <a class="btn btn-primary btn-lg" href="#" onclick="dispb()" role="button">Browse Times</a>
+        </div>
+    </div>
+    <script>
+        //to change time zone
+        //const str = new Date().toLocaleString('en-US', { timeZone: 'Asia/Jakarta' });
+        //console.log(str);
+          let b;
+          let a;
+          let date;
+          let time;
+          var y='Asia/Kolkata';
+          function tz(per1){
+              dispn();
+              y=per1;
+              return y;
+         }
+          const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+         setInterval(() => {
+             b = new Date(); 
+              a = new Date(b.toLocaleString('en-US', { timeZone: y })); 
+              date = a.toLocaleDateString(undefined, options);
+              time = ('0'+ a.getHours()).slice(-2) + ':' + ('0'+ a.getMinutes()).slice(-2) + ':' + ('0'+ a.getSeconds()).slice(-2);
+              document.getElementById('time').innerHTML = time + "<br>on " + date;
+          }, 1000);
+
+          function myFunction() {
+		  // Declare variables
+		  var input, filter, table, tr, td, i, txtValue;
+		  input = document.getElementById("myInput");
+		  filter = input.value.toUpperCase();
+		  table = document.getElementById("myTable");
+		  tr = table.getElementsByTagName("tr");
+		
+		  // Loop through all table rows, and hide those who don't match the search query
+		  for (i = 0; i < tr.length; i++) {
+			td = tr[i].getElementsByTagName("td")[2];
+			if (td) {
+			  txtValue = td.textContent || td.innerText;
+			  if (txtValue.toUpperCase().indexOf(filter) > -1) {
+				tr[i].style.display = "";
+			  } else {
+				tr[i].style.display = "none";
+			  }
+			}
+		  }
+		}
+
+        function dispn (){
+            document.getElementById('clk').style.display="block";
+            document.getElementById('tim').style.display="none";
+            document.getElementById('t').classList.remove("active");
+            document.getElementById('h').classList.add("active");
+            }
+        function dispb (){
+            document.getElementById('clk').style.display="none";
+            document.getElementById('tim').style.display="block";
+            document.getElementById('h').classList.remove("active");
+            document.getElementById('t').classList.add("active");
+            }
+    </script>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+
+        <div id="tim" style="display: none" class="col-sm-10 col-sm-offset-2">
+            <h2>List of Time Zones</h2>
+        <p>There are total of <strong>423</strong> time zones listed.</p>
+            <div style="text-align:right">
+                <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search Time Zones for different Countries . . . ." >
+            </div>
+        <table id="myTable">
+            <tr class="header">
+                    <th width="10%">Index</th>
+                    <th width="10%">Country Code</th>
+                    <th width="30%">Country Name</th>
+                    <th width="30%">Time Zone</th>
+                    <th width="10%">GMT Offset</th>
+                    <th width="10%">Action</th>
+                </tr>
+            
+                        <tr>
+                            <td>1</td>
+                            <td>AF</td>
+                            <td>Afghanistan</td>
+                            <td>Asia/Kabul</td>
+                            <td>UTC +04:30</td>
+                            <td><button class="btn btn-primary" onclick="tz('Asia/Kabul')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>AL</td>
+                            <td>Albania</td>
+                            <td>Europe/Tirane</td>
+                            <td>UTC +02:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Europe/Tirane')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>DZ</td>
+                            <td>Algeria</td>
+                            <td>Africa/Algiers</td>
+                            <td>UTC +01:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Africa/Algiers')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>AS</td>
+                            <td>American Samoa</td>
+                            <td>Pacific/Pago_Pago</td>
+                            <td>UTC -11:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Pacific/Pago_Pago')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>AD</td>
+                            <td>Andorra</td>
+                            <td>Europe/Andorra</td>
+                            <td>UTC +02:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Europe/Andorra')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td>AO</td>
+                            <td>Angola</td>
+                            <td>Africa/Luanda</td>
+                            <td>UTC +01:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Africa/Luanda')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>7</td>
+                            <td>AI</td>
+                            <td>Anguilla</td>
+                            <td>America/Anguilla</td>
+                            <td>UTC -04:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Anguilla')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>8</td>
+                            <td>AQ</td>
+                            <td>Antarctica</td>
+                            <td>Antarctica/Casey</td>
+                            <td>UTC +11:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Antarctica/Casey')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>9</td>
+                            <td>AQ</td>
+                            <td>Antarctica</td>
+                            <td>Antarctica/Davis</td>
+                            <td>UTC +07:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Antarctica/Davis')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>10</td>
+                            <td>AQ</td>
+                            <td>Antarctica</td>
+                            <td>Antarctica/DumontDUrville</td>
+                            <td>UTC +10:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Antarctica/DumontDUrville')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>11</td>
+                            <td>AQ</td>
+                            <td>Antarctica</td>
+                            <td>Antarctica/Mawson</td>
+                            <td>UTC +05:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Antarctica/Mawson')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>12</td>
+                            <td>AQ</td>
+                            <td>Antarctica</td>
+                            <td>Antarctica/McMurdo</td>
+                            <td>UTC +12:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Antarctica/McMurdo')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>13</td>
+                            <td>AQ</td>
+                            <td>Antarctica</td>
+                            <td>Antarctica/Palmer</td>
+                            <td>UTC -03:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Antarctica/Palmer')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>14</td>
+                            <td>AQ</td>
+                            <td>Antarctica</td>
+                            <td>Antarctica/Rothera</td>
+                            <td>UTC -03:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Antarctica/Rothera')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>15</td>
+                            <td>AQ</td>
+                            <td>Antarctica</td>
+                            <td>Antarctica/Syowa</td>
+                            <td>UTC +03:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Antarctica/Syowa')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>16</td>
+                            <td>AQ</td>
+                            <td>Antarctica</td>
+                            <td>Antarctica/Troll</td>
+                            <td>UTC +02:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Antarctica/Troll')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>17</td>
+                            <td>AQ</td>
+                            <td>Antarctica</td>
+                            <td>Antarctica/Vostok</td>
+                            <td>UTC +06:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Antarctica/Vostok')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>18</td>
+                            <td>AG</td>
+                            <td>Antigua and Barbuda</td>
+                            <td>America/Antigua</td>
+                            <td>UTC -04:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Antigua')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>19</td>
+                            <td>AR</td>
+                            <td>Argentina</td>
+                            <td>America/Argentina/Buenos_Aires</td>
+                            <td>UTC -03:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Argentina/Buenos_Aires')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>20</td>
+                            <td>AR</td>
+                            <td>Argentina</td>
+                            <td>America/Argentina/Catamarca</td>
+                            <td>UTC -03:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Argentina/Catamarca')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>21</td>
+                            <td>AR</td>
+                            <td>Argentina</td>
+                            <td>America/Argentina/Cordoba</td>
+                            <td>UTC -03:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Argentina/Cordoba')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>22</td>
+                            <td>AR</td>
+                            <td>Argentina</td>
+                            <td>America/Argentina/Jujuy</td>
+                            <td>UTC -03:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Argentina/Jujuy')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>23</td>
+                            <td>AR</td>
+                            <td>Argentina</td>
+                            <td>America/Argentina/La_Rioja</td>
+                            <td>UTC -03:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Argentina/La_Rioja')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>24</td>
+                            <td>AR</td>
+                            <td>Argentina</td>
+                            <td>America/Argentina/Mendoza</td>
+                            <td>UTC -03:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Argentina/Mendoza')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>25</td>
+                            <td>AR</td>
+                            <td>Argentina</td>
+                            <td>America/Argentina/Rio_Gallegos</td>
+                            <td>UTC -03:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Argentina/Rio_Gallegos')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>26</td>
+                            <td>AR</td>
+                            <td>Argentina</td>
+                            <td>America/Argentina/Salta</td>
+                            <td>UTC -03:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Argentina/Salta')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>27</td>
+                            <td>AR</td>
+                            <td>Argentina</td>
+                            <td>America/Argentina/San_Juan</td>
+                            <td>UTC -03:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Argentina/San_Juan')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>28</td>
+                            <td>AR</td>
+                            <td>Argentina</td>
+                            <td>America/Argentina/San_Luis</td>
+                            <td>UTC -03:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Argentina/San_Luis')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>29</td>
+                            <td>AR</td>
+                            <td>Argentina</td>
+                            <td>America/Argentina/Tucuman</td>
+                            <td>UTC -03:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Argentina/Tucuman')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>30</td>
+                            <td>AR</td>
+                            <td>Argentina</td>
+                            <td>America/Argentina/Ushuaia</td>
+                            <td>UTC -03:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Argentina/Ushuaia')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>31</td>
+                            <td>AM</td>
+                            <td>Armenia</td>
+                            <td>Asia/Yerevan</td>
+                            <td>UTC +04:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Asia/Yerevan')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>32</td>
+                            <td>AW</td>
+                            <td>Aruba</td>
+                            <td>America/Aruba</td>
+                            <td>UTC -04:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Aruba')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>33</td>
+                            <td>AU</td>
+                            <td>Australia</td>
+                            <td>Antarctica/Macquarie</td>
+                            <td>UTC +10:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Antarctica/Macquarie')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>34</td>
+                            <td>AU</td>
+                            <td>Australia</td>
+                            <td>Australia/Adelaide</td>
+                            <td>UTC +09:30</td>
+                            <td><button class="btn btn-primary" onclick="tz('Australia/Adelaide')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>35</td>
+                            <td>AU</td>
+                            <td>Australia</td>
+                            <td>Australia/Brisbane</td>
+                            <td>UTC +10:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Australia/Brisbane')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>36</td>
+                            <td>AU</td>
+                            <td>Australia</td>
+                            <td>Australia/Broken_Hill</td>
+                            <td>UTC +09:30</td>
+                            <td><button class="btn btn-primary" onclick="tz('Australia/Broken_Hill')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>37</td>
+                            <td>AU</td>
+                            <td>Australia</td>
+                            <td>Australia/Darwin</td>
+                            <td>UTC +09:30</td>
+                            <td><button class="btn btn-primary" onclick="tz('Australia/Darwin')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>38</td>
+                            <td>AU</td>
+                            <td>Australia</td>
+                            <td>Australia/Eucla</td>
+                            <td>UTC +08:45</td>
+                            <td><button class="btn btn-primary" onclick="tz('Australia/Eucla')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>39</td>
+                            <td>AU</td>
+                            <td>Australia</td>
+                            <td>Australia/Hobart</td>
+                            <td>UTC +10:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Australia/Hobart')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>40</td>
+                            <td>AU</td>
+                            <td>Australia</td>
+                            <td>Australia/Lindeman</td>
+                            <td>UTC +10:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Australia/Lindeman')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>41</td>
+                            <td>AU</td>
+                            <td>Australia</td>
+                            <td>Australia/Lord_Howe</td>
+                            <td>UTC +10:30</td>
+                            <td><button class="btn btn-primary" onclick="tz('Australia/Lord_Howe')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>42</td>
+                            <td>AU</td>
+                            <td>Australia</td>
+                            <td>Australia/Melbourne</td>
+                            <td>UTC +10:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Australia/Melbourne')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>43</td>
+                            <td>AU</td>
+                            <td>Australia</td>
+                            <td>Australia/Perth</td>
+                            <td>UTC +08:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Australia/Perth')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>44</td>
+                            <td>AU</td>
+                            <td>Australia</td>
+                            <td>Australia/Sydney</td>
+                            <td>UTC +10:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Australia/Sydney')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>45</td>
+                            <td>AT</td>
+                            <td>Austria</td>
+                            <td>Europe/Vienna</td>
+                            <td>UTC +02:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Europe/Vienna')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>46</td>
+                            <td>AZ</td>
+                            <td>Azerbaijan</td>
+                            <td>Asia/Baku</td>
+                            <td>UTC +04:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Asia/Baku')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>47</td>
+                            <td>BS</td>
+                            <td>Bahamas</td>
+                            <td>America/Nassau</td>
+                            <td>UTC -04:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Nassau')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>48</td>
+                            <td>BH</td>
+                            <td>Bahrain</td>
+                            <td>Asia/Bahrain</td>
+                            <td>UTC +03:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Asia/Bahrain')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>49</td>
+                            <td>BD</td>
+                            <td>Bangladesh</td>
+                            <td>Asia/Dhaka</td>
+                            <td>UTC +06:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Asia/Dhaka')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>50</td>
+                            <td>BB</td>
+                            <td>Barbados</td>
+                            <td>America/Barbados</td>
+                            <td>UTC -04:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Barbados')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>51</td>
+                            <td>BY</td>
+                            <td>Belarus</td>
+                            <td>Europe/Minsk</td>
+                            <td>UTC +03:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Europe/Minsk')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>52</td>
+                            <td>BE</td>
+                            <td>Belgium</td>
+                            <td>Europe/Brussels</td>
+                            <td>UTC +02:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Europe/Brussels')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>53</td>
+                            <td>BZ</td>
+                            <td>Belize</td>
+                            <td>America/Belize</td>
+                            <td>UTC -06:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Belize')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>54</td>
+                            <td>BJ</td>
+                            <td>Benin</td>
+                            <td>Africa/Porto-Novo</td>
+                            <td>UTC +01:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Africa/Porto-Novo')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>55</td>
+                            <td>BM</td>
+                            <td>Bermuda</td>
+                            <td>Atlantic/Bermuda</td>
+                            <td>UTC -03:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Atlantic/Bermuda')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>56</td>
+                            <td>BT</td>
+                            <td>Bhutan</td>
+                            <td>Asia/Thimphu</td>
+                            <td>UTC +06:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Asia/Thimphu')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>57</td>
+                            <td>BO</td>
+                            <td>Bolivia, Plurinational State of</td>
+                            <td>America/La_Paz</td>
+                            <td>UTC -04:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/La_Paz')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>58</td>
+                            <td>BQ</td>
+                            <td>Bonaire, Sint Eustatius and Saba</td>
+                            <td>America/Kralendijk</td>
+                            <td>UTC -04:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Kralendijk')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>59</td>
+                            <td>BA</td>
+                            <td>Bosnia and Herzegovina</td>
+                            <td>Europe/Sarajevo</td>
+                            <td>UTC +02:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Europe/Sarajevo')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>60</td>
+                            <td>BW</td>
+                            <td>Botswana</td>
+                            <td>Africa/Gaborone</td>
+                            <td>UTC +02:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Africa/Gaborone')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>61</td>
+                            <td>BR</td>
+                            <td>Brazil</td>
+                            <td>America/Araguaina</td>
+                            <td>UTC -03:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Araguaina')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>62</td>
+                            <td>BR</td>
+                            <td>Brazil</td>
+                            <td>America/Bahia</td>
+                            <td>UTC -03:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Bahia')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>63</td>
+                            <td>BR</td>
+                            <td>Brazil</td>
+                            <td>America/Belem</td>
+                            <td>UTC -03:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Belem')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>64</td>
+                            <td>BR</td>
+                            <td>Brazil</td>
+                            <td>America/Boa_Vista</td>
+                            <td>UTC -04:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Boa_Vista')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>65</td>
+                            <td>BR</td>
+                            <td>Brazil</td>
+                            <td>America/Campo_Grande</td>
+                            <td>UTC -04:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Campo_Grande')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>66</td>
+                            <td>BR</td>
+                            <td>Brazil</td>
+                            <td>America/Cuiaba</td>
+                            <td>UTC -04:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Cuiaba')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>67</td>
+                            <td>BR</td>
+                            <td>Brazil</td>
+                            <td>America/Eirunepe</td>
+                            <td>UTC -05:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Eirunepe')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>68</td>
+                            <td>BR</td>
+                            <td>Brazil</td>
+                            <td>America/Fortaleza</td>
+                            <td>UTC -03:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Fortaleza')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>69</td>
+                            <td>BR</td>
+                            <td>Brazil</td>
+                            <td>America/Maceio</td>
+                            <td>UTC -03:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Maceio')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>70</td>
+                            <td>BR</td>
+                            <td>Brazil</td>
+                            <td>America/Manaus</td>
+                            <td>UTC -04:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Manaus')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>71</td>
+                            <td>BR</td>
+                            <td>Brazil</td>
+                            <td>America/Noronha</td>
+                            <td>UTC -02:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Noronha')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>72</td>
+                            <td>BR</td>
+                            <td>Brazil</td>
+                            <td>America/Porto_Velho</td>
+                            <td>UTC -04:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Porto_Velho')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>73</td>
+                            <td>BR</td>
+                            <td>Brazil</td>
+                            <td>America/Recife</td>
+                            <td>UTC -03:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Recife')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>74</td>
+                            <td>BR</td>
+                            <td>Brazil</td>
+                            <td>America/Rio_Branco</td>
+                            <td>UTC -05:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Rio_Branco')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>75</td>
+                            <td>BR</td>
+                            <td>Brazil</td>
+                            <td>America/Santarem</td>
+                            <td>UTC -03:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Santarem')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>76</td>
+                            <td>BR</td>
+                            <td>Brazil</td>
+                            <td>America/Sao_Paulo</td>
+                            <td>UTC -03:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Sao_Paulo')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>77</td>
+                            <td>IO</td>
+                            <td>British Indian Ocean Territory</td>
+                            <td>Indian/Chagos</td>
+                            <td>UTC +06:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Indian/Chagos')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>78</td>
+                            <td>BN</td>
+                            <td>Brunei Darussalam</td>
+                            <td>Asia/Brunei</td>
+                            <td>UTC +08:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Asia/Brunei')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>79</td>
+                            <td>BG</td>
+                            <td>Bulgaria</td>
+                            <td>Europe/Sofia</td>
+                            <td>UTC +03:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Europe/Sofia')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>80</td>
+                            <td>BF</td>
+                            <td>Burkina Faso</td>
+                            <td>Africa/Ouagadougou</td>
+                            <td>UTC</td>
+                            <td><button class="btn btn-primary" onclick="tz('Africa/Ouagadougou')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>81</td>
+                            <td>BI</td>
+                            <td>Burundi</td>
+                            <td>Africa/Bujumbura</td>
+                            <td>UTC +02:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Africa/Bujumbura')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>82</td>
+                            <td>KH</td>
+                            <td>Cambodia</td>
+                            <td>Asia/Phnom_Penh</td>
+                            <td>UTC +07:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Asia/Phnom_Penh')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>83</td>
+                            <td>CM</td>
+                            <td>Cameroon</td>
+                            <td>Africa/Douala</td>
+                            <td>UTC +01:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Africa/Douala')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>84</td>
+                            <td>CA</td>
+                            <td>Canada</td>
+                            <td>America/Atikokan</td>
+                            <td>UTC -05:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Atikokan')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>85</td>
+                            <td>CA</td>
+                            <td>Canada</td>
+                            <td>America/Blanc-Sablon</td>
+                            <td>UTC -04:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Blanc-Sablon')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>86</td>
+                            <td>CA</td>
+                            <td>Canada</td>
+                            <td>America/Cambridge_Bay</td>
+                            <td>UTC -06:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Cambridge_Bay')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>87</td>
+                            <td>CA</td>
+                            <td>Canada</td>
+                            <td>America/Creston</td>
+                            <td>UTC -07:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Creston')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>88</td>
+                            <td>CA</td>
+                            <td>Canada</td>
+                            <td>America/Dawson</td>
+                            <td>UTC -07:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Dawson')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>89</td>
+                            <td>CA</td>
+                            <td>Canada</td>
+                            <td>America/Dawson_Creek</td>
+                            <td>UTC -07:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Dawson_Creek')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>90</td>
+                            <td>CA</td>
+                            <td>Canada</td>
+                            <td>America/Edmonton</td>
+                            <td>UTC -06:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Edmonton')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>91</td>
+                            <td>CA</td>
+                            <td>Canada</td>
+                            <td>America/Fort_Nelson</td>
+                            <td>UTC -07:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Fort_Nelson')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>92</td>
+                            <td>CA</td>
+                            <td>Canada</td>
+                            <td>America/Glace_Bay</td>
+                            <td>UTC -03:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Glace_Bay')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>93</td>
+                            <td>CA</td>
+                            <td>Canada</td>
+                            <td>America/Goose_Bay</td>
+                            <td>UTC -03:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Goose_Bay')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>94</td>
+                            <td>CA</td>
+                            <td>Canada</td>
+                            <td>America/Halifax</td>
+                            <td>UTC -03:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Halifax')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>95</td>
+                            <td>CA</td>
+                            <td>Canada</td>
+                            <td>America/Inuvik</td>
+                            <td>UTC -06:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Inuvik')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>96</td>
+                            <td>CA</td>
+                            <td>Canada</td>
+                            <td>America/Iqaluit</td>
+                            <td>UTC -04:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Iqaluit')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>97</td>
+                            <td>CA</td>
+                            <td>Canada</td>
+                            <td>America/Moncton</td>
+                            <td>UTC -03:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Moncton')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>98</td>
+                            <td>CA</td>
+                            <td>Canada</td>
+                            <td>America/Nipigon</td>
+                            <td>UTC -04:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Nipigon')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>99</td>
+                            <td>CA</td>
+                            <td>Canada</td>
+                            <td>America/Pangnirtung</td>
+                            <td>UTC -04:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Pangnirtung')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>100</td>
+                            <td>CA</td>
+                            <td>Canada</td>
+                            <td>America/Rainy_River</td>
+                            <td>UTC -05:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Rainy_River')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>101</td>
+                            <td>CA</td>
+                            <td>Canada</td>
+                            <td>America/Rankin_Inlet</td>
+                            <td>UTC -05:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Rankin_Inlet')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>102</td>
+                            <td>CA</td>
+                            <td>Canada</td>
+                            <td>America/Regina</td>
+                            <td>UTC -06:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Regina')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>103</td>
+                            <td>CA</td>
+                            <td>Canada</td>
+                            <td>America/Resolute</td>
+                            <td>UTC -05:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Resolute')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>104</td>
+                            <td>CA</td>
+                            <td>Canada</td>
+                            <td>America/St_Johns</td>
+                            <td>UTC -02:30</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/St_Johns')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>105</td>
+                            <td>CA</td>
+                            <td>Canada</td>
+                            <td>America/Swift_Current</td>
+                            <td>UTC -06:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Swift_Current')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>106</td>
+                            <td>CA</td>
+                            <td>Canada</td>
+                            <td>America/Thunder_Bay</td>
+                            <td>UTC -04:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Thunder_Bay')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>107</td>
+                            <td>CA</td>
+                            <td>Canada</td>
+                            <td>America/Toronto</td>
+                            <td>UTC -04:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Toronto')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>108</td>
+                            <td>CA</td>
+                            <td>Canada</td>
+                            <td>America/Vancouver</td>
+                            <td>UTC -07:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Vancouver')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>109</td>
+                            <td>CA</td>
+                            <td>Canada</td>
+                            <td>America/Whitehorse</td>
+                            <td>UTC -07:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Whitehorse')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>110</td>
+                            <td>CA</td>
+                            <td>Canada</td>
+                            <td>America/Winnipeg</td>
+                            <td>UTC -05:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Winnipeg')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>111</td>
+                            <td>CA</td>
+                            <td>Canada</td>
+                            <td>America/Yellowknife</td>
+                            <td>UTC -06:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Yellowknife')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>112</td>
+                            <td>CV</td>
+                            <td>Cape Verde</td>
+                            <td>Atlantic/Cape_Verde</td>
+                            <td>UTC -01:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Atlantic/Cape_Verde')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>113</td>
+                            <td>KY</td>
+                            <td>Cayman Islands</td>
+                            <td>America/Cayman</td>
+                            <td>UTC -05:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Cayman')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>114</td>
+                            <td>CF</td>
+                            <td>Central African Republic</td>
+                            <td>Africa/Bangui</td>
+                            <td>UTC +01:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Africa/Bangui')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>115</td>
+                            <td>TD</td>
+                            <td>Chad</td>
+                            <td>Africa/Ndjamena</td>
+                            <td>UTC +01:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Africa/Ndjamena')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>116</td>
+                            <td>CL</td>
+                            <td>Chile</td>
+                            <td>America/Punta_Arenas</td>
+                            <td>UTC -03:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Punta_Arenas')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>117</td>
+                            <td>CL</td>
+                            <td>Chile</td>
+                            <td>America/Santiago</td>
+                            <td>UTC -04:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Santiago')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>118</td>
+                            <td>CL</td>
+                            <td>Chile</td>
+                            <td>Pacific/Easter</td>
+                            <td>UTC -06:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Pacific/Easter')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>119</td>
+                            <td>CN</td>
+                            <td>China</td>
+                            <td>Asia/Shanghai</td>
+                            <td>UTC +08:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Asia/Shanghai')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>120</td>
+                            <td>CN</td>
+                            <td>China</td>
+                            <td>Asia/Urumqi</td>
+                            <td>UTC +06:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Asia/Urumqi')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>121</td>
+                            <td>CX</td>
+                            <td>Christmas Island</td>
+                            <td>Indian/Christmas</td>
+                            <td>UTC +07:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Indian/Christmas')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>122</td>
+                            <td>CC</td>
+                            <td>Cocos (Keeling) Islands</td>
+                            <td>Indian/Cocos</td>
+                            <td>UTC +06:30</td>
+                            <td><button class="btn btn-primary" onclick="tz('Indian/Cocos')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>123</td>
+                            <td>CO</td>
+                            <td>Colombia</td>
+                            <td>America/Bogota</td>
+                            <td>UTC -05:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Bogota')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>124</td>
+                            <td>KM</td>
+                            <td>Comoros</td>
+                            <td>Indian/Comoro</td>
+                            <td>UTC +03:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Indian/Comoro')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>125</td>
+                            <td>CG</td>
+                            <td>Congo</td>
+                            <td>Africa/Brazzaville</td>
+                            <td>UTC +01:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Africa/Brazzaville')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>126</td>
+                            <td>CD</td>
+                            <td>Congo, the Democratic Republic of the</td>
+                            <td>Africa/Kinshasa</td>
+                            <td>UTC +01:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Africa/Kinshasa')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>127</td>
+                            <td>CD</td>
+                            <td>Congo, the Democratic Republic of the</td>
+                            <td>Africa/Lubumbashi</td>
+                            <td>UTC +02:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Africa/Lubumbashi')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>128</td>
+                            <td>CK</td>
+                            <td>Cook Islands</td>
+                            <td>Pacific/Rarotonga</td>
+                            <td>UTC -10:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Pacific/Rarotonga')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>129</td>
+                            <td>CR</td>
+                            <td>Costa Rica</td>
+                            <td>America/Costa_Rica</td>
+                            <td>UTC -06:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Costa_Rica')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>130</td>
+                            <td>HR</td>
+                            <td>Croatia</td>
+                            <td>Europe/Zagreb</td>
+                            <td>UTC +02:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Europe/Zagreb')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>131</td>
+                            <td>CU</td>
+                            <td>Cuba</td>
+                            <td>America/Havana</td>
+                            <td>UTC -04:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Havana')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>132</td>
+                            <td>CW</td>
+                            <td>Curaçao</td>
+                            <td>America/Curacao</td>
+                            <td>UTC -04:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Curacao')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>133</td>
+                            <td>CY</td>
+                            <td>Cyprus</td>
+                            <td>Asia/Famagusta</td>
+                            <td>UTC +03:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Asia/Famagusta')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>134</td>
+                            <td>CY</td>
+                            <td>Cyprus</td>
+                            <td>Asia/Nicosia</td>
+                            <td>UTC +03:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Asia/Nicosia')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>135</td>
+                            <td>CZ</td>
+                            <td>Czech Republic</td>
+                            <td>Europe/Prague</td>
+                            <td>UTC +02:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Europe/Prague')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>136</td>
+                            <td>CI</td>
+                            <td>Côte d'Ivoire</td>
+                            <td>Africa/Abidjan</td>
+                            <td>UTC</td>
+                            <td><button class="btn btn-primary" onclick="tz('Africa/Abidjan')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>137</td>
+                            <td>DK</td>
+                            <td>Denmark</td>
+                            <td>Europe/Copenhagen</td>
+                            <td>UTC +02:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Europe/Copenhagen')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>138</td>
+                            <td>DJ</td>
+                            <td>Djibouti</td>
+                            <td>Africa/Djibouti</td>
+                            <td>UTC +03:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Africa/Djibouti')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>139</td>
+                            <td>DM</td>
+                            <td>Dominica</td>
+                            <td>America/Dominica</td>
+                            <td>UTC -04:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Dominica')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>140</td>
+                            <td>DO</td>
+                            <td>Dominican Republic</td>
+                            <td>America/Santo_Domingo</td>
+                            <td>UTC -04:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Santo_Domingo')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>141</td>
+                            <td>EC</td>
+                            <td>Ecuador</td>
+                            <td>America/Guayaquil</td>
+                            <td>UTC -05:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Guayaquil')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>142</td>
+                            <td>EC</td>
+                            <td>Ecuador</td>
+                            <td>Pacific/Galapagos</td>
+                            <td>UTC -06:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Pacific/Galapagos')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>143</td>
+                            <td>EG</td>
+                            <td>Egypt</td>
+                            <td>Africa/Cairo</td>
+                            <td>UTC +02:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Africa/Cairo')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>144</td>
+                            <td>SV</td>
+                            <td>El Salvador</td>
+                            <td>America/El_Salvador</td>
+                            <td>UTC -06:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/El_Salvador')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>145</td>
+                            <td>GQ</td>
+                            <td>Equatorial Guinea</td>
+                            <td>Africa/Malabo</td>
+                            <td>UTC +01:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Africa/Malabo')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>146</td>
+                            <td>ER</td>
+                            <td>Eritrea</td>
+                            <td>Africa/Asmara</td>
+                            <td>UTC +03:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Africa/Asmara')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>147</td>
+                            <td>EE</td>
+                            <td>Estonia</td>
+                            <td>Europe/Tallinn</td>
+                            <td>UTC +03:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Europe/Tallinn')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>148</td>
+                            <td>ET</td>
+                            <td>Ethiopia</td>
+                            <td>Africa/Addis_Ababa</td>
+                            <td>UTC +03:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Africa/Addis_Ababa')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>149</td>
+                            <td>FK</td>
+                            <td>Falkland Islands (Malvinas)</td>
+                            <td>Atlantic/Stanley</td>
+                            <td>UTC -03:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Atlantic/Stanley')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>150</td>
+                            <td>FO</td>
+                            <td>Faroe Islands</td>
+                            <td>Atlantic/Faroe</td>
+                            <td>UTC +01:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Atlantic/Faroe')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>151</td>
+                            <td>FJ</td>
+                            <td>Fiji</td>
+                            <td>Pacific/Fiji</td>
+                            <td>UTC +12:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Pacific/Fiji')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>152</td>
+                            <td>FI</td>
+                            <td>Finland</td>
+                            <td>Europe/Helsinki</td>
+                            <td>UTC +03:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Europe/Helsinki')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>153</td>
+                            <td>FR</td>
+                            <td>France</td>
+                            <td>Europe/Paris</td>
+                            <td>UTC +02:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Europe/Paris')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>154</td>
+                            <td>GF</td>
+                            <td>French Guiana</td>
+                            <td>America/Cayenne</td>
+                            <td>UTC -03:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Cayenne')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>155</td>
+                            <td>PF</td>
+                            <td>French Polynesia</td>
+                            <td>Pacific/Gambier</td>
+                            <td>UTC -09:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Pacific/Gambier')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>156</td>
+                            <td>PF</td>
+                            <td>French Polynesia</td>
+                            <td>Pacific/Marquesas</td>
+                            <td>UTC -09:30</td>
+                            <td><button class="btn btn-primary" onclick="tz('Pacific/Marquesas')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>157</td>
+                            <td>PF</td>
+                            <td>French Polynesia</td>
+                            <td>Pacific/Tahiti</td>
+                            <td>UTC -10:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Pacific/Tahiti')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>158</td>
+                            <td>TF</td>
+                            <td>French Southern Territories</td>
+                            <td>Indian/Kerguelen</td>
+                            <td>UTC +05:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Indian/Kerguelen')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>159</td>
+                            <td>GA</td>
+                            <td>Gabon</td>
+                            <td>Africa/Libreville</td>
+                            <td>UTC +01:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Africa/Libreville')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>160</td>
+                            <td>GM</td>
+                            <td>Gambia</td>
+                            <td>Africa/Banjul</td>
+                            <td>UTC</td>
+                            <td><button class="btn btn-primary" onclick="tz('Africa/Banjul')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>161</td>
+                            <td>GE</td>
+                            <td>Georgia</td>
+                            <td>Asia/Tbilisi</td>
+                            <td>UTC +04:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Asia/Tbilisi')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>162</td>
+                            <td>DE</td>
+                            <td>Germany</td>
+                            <td>Europe/Berlin</td>
+                            <td>UTC +02:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Europe/Berlin')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>163</td>
+                            <td>DE</td>
+                            <td>Germany</td>
+                            <td>Europe/Busingen</td>
+                            <td>UTC +02:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Europe/Busingen')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>164</td>
+                            <td>GH</td>
+                            <td>Ghana</td>
+                            <td>Africa/Accra</td>
+                            <td>UTC</td>
+                            <td><button class="btn btn-primary" onclick="tz('Africa/Accra')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>165</td>
+                            <td>GI</td>
+                            <td>Gibraltar</td>
+                            <td>Europe/Gibraltar</td>
+                            <td>UTC +02:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Europe/Gibraltar')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>166</td>
+                            <td>GR</td>
+                            <td>Greece</td>
+                            <td>Europe/Athens</td>
+                            <td>UTC +03:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Europe/Athens')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>167</td>
+                            <td>GL</td>
+                            <td>Greenland</td>
+                            <td>America/Danmarkshavn</td>
+                            <td>UTC</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Danmarkshavn')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>168</td>
+                            <td>GL</td>
+                            <td>Greenland</td>
+                            <td>America/Nuuk</td>
+                            <td>UTC -02:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Nuuk')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>169</td>
+                            <td>GL</td>
+                            <td>Greenland</td>
+                            <td>America/Scoresbysund</td>
+                            <td>UTC</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Scoresbysund')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>170</td>
+                            <td>GL</td>
+                            <td>Greenland</td>
+                            <td>America/Thule</td>
+                            <td>UTC -03:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Thule')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>171</td>
+                            <td>GD</td>
+                            <td>Grenada</td>
+                            <td>America/Grenada</td>
+                            <td>UTC -04:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Grenada')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>172</td>
+                            <td>GP</td>
+                            <td>Guadeloupe</td>
+                            <td>America/Guadeloupe</td>
+                            <td>UTC -04:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Guadeloupe')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>173</td>
+                            <td>GU</td>
+                            <td>Guam</td>
+                            <td>Pacific/Guam</td>
+                            <td>UTC +10:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Pacific/Guam')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>174</td>
+                            <td>GT</td>
+                            <td>Guatemala</td>
+                            <td>America/Guatemala</td>
+                            <td>UTC -06:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Guatemala')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>175</td>
+                            <td>GG</td>
+                            <td>Guernsey</td>
+                            <td>Europe/Guernsey</td>
+                            <td>UTC +01:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Europe/Guernsey')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>176</td>
+                            <td>GN</td>
+                            <td>Guinea</td>
+                            <td>Africa/Conakry</td>
+                            <td>UTC</td>
+                            <td><button class="btn btn-primary" onclick="tz('Africa/Conakry')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>177</td>
+                            <td>GW</td>
+                            <td>Guinea-Bissau</td>
+                            <td>Africa/Bissau</td>
+                            <td>UTC</td>
+                            <td><button class="btn btn-primary" onclick="tz('Africa/Bissau')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>178</td>
+                            <td>GY</td>
+                            <td>Guyana</td>
+                            <td>America/Guyana</td>
+                            <td>UTC -04:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Guyana')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>179</td>
+                            <td>HT</td>
+                            <td>Haiti</td>
+                            <td>America/Port-au-Prince</td>
+                            <td>UTC -04:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Port-au-Prince')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>180</td>
+                            <td>VA</td>
+                            <td>Holy See (Vatican City State)</td>
+                            <td>Europe/Vatican</td>
+                            <td>UTC +02:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Europe/Vatican')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>181</td>
+                            <td>HN</td>
+                            <td>Honduras</td>
+                            <td>America/Tegucigalpa</td>
+                            <td>UTC -06:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Tegucigalpa')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>182</td>
+                            <td>HK</td>
+                            <td>Hong Kong</td>
+                            <td>Asia/Hong_Kong</td>
+                            <td>UTC +08:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Asia/Hong_Kong')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>183</td>
+                            <td>HU</td>
+                            <td>Hungary</td>
+                            <td>Europe/Budapest</td>
+                            <td>UTC +02:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Europe/Budapest')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>184</td>
+                            <td>IS</td>
+                            <td>Iceland</td>
+                            <td>Atlantic/Reykjavik</td>
+                            <td>UTC</td>
+                            <td><button class="btn btn-primary" onclick="tz('Atlantic/Reykjavik')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>185</td>
+                            <td>IN</td>
+                            <td>India</td>
+                            <td>Asia/Kolkata</td>
+                            <td>UTC +05:30</td>
+                            <td><button class="btn btn-primary" onclick="tz('Asia/Kolkata')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>186</td>
+                            <td>ID</td>
+                            <td>Indonesia</td>
+                            <td>Asia/Jakarta</td>
+                            <td>UTC +07:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Asia/Jakarta')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>187</td>
+                            <td>ID</td>
+                            <td>Indonesia</td>
+                            <td>Asia/Jayapura</td>
+                            <td>UTC +09:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Asia/Jayapura')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>188</td>
+                            <td>ID</td>
+                            <td>Indonesia</td>
+                            <td>Asia/Makassar</td>
+                            <td>UTC +08:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Asia/Makassar')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>189</td>
+                            <td>ID</td>
+                            <td>Indonesia</td>
+                            <td>Asia/Pontianak</td>
+                            <td>UTC +07:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Asia/Pontianak')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>190</td>
+                            <td>IR</td>
+                            <td>Iran, Islamic Republic of</td>
+                            <td>Asia/Tehran</td>
+                            <td>UTC +04:30</td>
+                            <td><button class="btn btn-primary" onclick="tz('Asia/Tehran')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>191</td>
+                            <td>IQ</td>
+                            <td>Iraq</td>
+                            <td>Asia/Baghdad</td>
+                            <td>UTC +03:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Asia/Baghdad')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>192</td>
+                            <td>IE</td>
+                            <td>Ireland</td>
+                            <td>Europe/Dublin</td>
+                            <td>UTC +01:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Europe/Dublin')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>193</td>
+                            <td>IM</td>
+                            <td>Isle of Man</td>
+                            <td>Europe/Isle_of_Man</td>
+                            <td>UTC +01:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Europe/Isle_of_Man')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>194</td>
+                            <td>IL</td>
+                            <td>Israel</td>
+                            <td>Asia/Jerusalem</td>
+                            <td>UTC +03:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Asia/Jerusalem')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>195</td>
+                            <td>IT</td>
+                            <td>Italy</td>
+                            <td>Europe/Rome</td>
+                            <td>UTC +02:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Europe/Rome')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>196</td>
+                            <td>JM</td>
+                            <td>Jamaica</td>
+                            <td>America/Jamaica</td>
+                            <td>UTC -05:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Jamaica')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>197</td>
+                            <td>JP</td>
+                            <td>Japan</td>
+                            <td>Asia/Tokyo</td>
+                            <td>UTC +09:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Asia/Tokyo')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>198</td>
+                            <td>JE</td>
+                            <td>Jersey</td>
+                            <td>Europe/Jersey</td>
+                            <td>UTC +01:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Europe/Jersey')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>199</td>
+                            <td>JO</td>
+                            <td>Jordan</td>
+                            <td>Asia/Amman</td>
+                            <td>UTC +03:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Asia/Amman')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>200</td>
+                            <td>KZ</td>
+                            <td>Kazakhstan</td>
+                            <td>Asia/Almaty</td>
+                            <td>UTC +06:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Asia/Almaty')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>201</td>
+                            <td>KZ</td>
+                            <td>Kazakhstan</td>
+                            <td>Asia/Aqtau</td>
+                            <td>UTC +05:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Asia/Aqtau')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>202</td>
+                            <td>KZ</td>
+                            <td>Kazakhstan</td>
+                            <td>Asia/Aqtobe</td>
+                            <td>UTC +05:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Asia/Aqtobe')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>203</td>
+                            <td>KZ</td>
+                            <td>Kazakhstan</td>
+                            <td>Asia/Atyrau</td>
+                            <td>UTC +05:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Asia/Atyrau')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>204</td>
+                            <td>KZ</td>
+                            <td>Kazakhstan</td>
+                            <td>Asia/Oral</td>
+                            <td>UTC +05:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Asia/Oral')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>205</td>
+                            <td>KZ</td>
+                            <td>Kazakhstan</td>
+                            <td>Asia/Qostanay</td>
+                            <td>UTC +06:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Asia/Qostanay')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>206</td>
+                            <td>KZ</td>
+                            <td>Kazakhstan</td>
+                            <td>Asia/Qyzylorda</td>
+                            <td>UTC +05:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Asia/Qyzylorda')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>207</td>
+                            <td>KE</td>
+                            <td>Kenya</td>
+                            <td>Africa/Nairobi</td>
+                            <td>UTC +03:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Africa/Nairobi')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>208</td>
+                            <td>KI</td>
+                            <td>Kiribati</td>
+                            <td>Pacific/Enderbury</td>
+                            <td>UTC +13:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Pacific/Enderbury')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>209</td>
+                            <td>KI</td>
+                            <td>Kiribati</td>
+                            <td>Pacific/Kiritimati</td>
+                            <td>UTC +14:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Pacific/Kiritimati')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>210</td>
+                            <td>KI</td>
+                            <td>Kiribati</td>
+                            <td>Pacific/Tarawa</td>
+                            <td>UTC +12:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Pacific/Tarawa')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>211</td>
+                            <td>KP</td>
+                            <td>Korea, Democratic People's Republic of</td>
+                            <td>Asia/Pyongyang</td>
+                            <td>UTC +09:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Asia/Pyongyang')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>212</td>
+                            <td>KR</td>
+                            <td>Korea, Republic of</td>
+                            <td>Asia/Seoul</td>
+                            <td>UTC +09:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Asia/Seoul')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>213</td>
+                            <td>KW</td>
+                            <td>Kuwait</td>
+                            <td>Asia/Kuwait</td>
+                            <td>UTC +03:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Asia/Kuwait')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>214</td>
+                            <td>KG</td>
+                            <td>Kyrgyzstan</td>
+                            <td>Asia/Bishkek</td>
+                            <td>UTC +06:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Asia/Bishkek')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>215</td>
+                            <td>LA</td>
+                            <td>Lao People's Democratic Republic</td>
+                            <td>Asia/Vientiane</td>
+                            <td>UTC +07:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Asia/Vientiane')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>216</td>
+                            <td>LV</td>
+                            <td>Latvia</td>
+                            <td>Europe/Riga</td>
+                            <td>UTC +03:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Europe/Riga')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>217</td>
+                            <td>LB</td>
+                            <td>Lebanon</td>
+                            <td>Asia/Beirut</td>
+                            <td>UTC +03:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Asia/Beirut')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>218</td>
+                            <td>LS</td>
+                            <td>Lesotho</td>
+                            <td>Africa/Maseru</td>
+                            <td>UTC +02:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Africa/Maseru')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>219</td>
+                            <td>LR</td>
+                            <td>Liberia</td>
+                            <td>Africa/Monrovia</td>
+                            <td>UTC</td>
+                            <td><button class="btn btn-primary" onclick="tz('Africa/Monrovia')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>220</td>
+                            <td>LY</td>
+                            <td>Libya</td>
+                            <td>Africa/Tripoli</td>
+                            <td>UTC +02:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Africa/Tripoli')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>221</td>
+                            <td>LI</td>
+                            <td>Liechtenstein</td>
+                            <td>Europe/Vaduz</td>
+                            <td>UTC +02:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Europe/Vaduz')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>222</td>
+                            <td>LT</td>
+                            <td>Lithuania</td>
+                            <td>Europe/Vilnius</td>
+                            <td>UTC +03:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Europe/Vilnius')">Select</button></td>
+                        </tr>
+                        <tr><td>223</td>
+                            <td>LU</td>
+                            <td>Luxembourg</td>
+                            <td>Europe/Luxembourg</td>
+                            <td>UTC +02:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Europe/Luxembourg')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>224</td>
+                            <td>MO</td>
+                            <td>Macao</td>
+                            <td>Asia/Macau</td>
+                            <td>UTC +08:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Asia/Macau')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>225</td>
+                            <td>MK</td>
+                            <td>Macedonia, the Former Yugoslav Republic of</td>
+                            <td>Europe/Skopje</td>
+                            <td>UTC +02:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Europe/Skopje')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>226</td>
+                            <td>MG</td>
+                            <td>Madagascar</td>
+                            <td>Indian/Antananarivo</td>
+                            <td>UTC +03:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Indian/Antananarivo')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>227</td>
+                            <td>MW</td>
+                            <td>Malawi</td>
+                            <td>Africa/Blantyre</td>
+                            <td>UTC +02:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Africa/Blantyre')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>228</td>
+                            <td>MY</td>
+                            <td>Malaysia</td>
+                            <td>Asia/Kuala_Lumpur</td>
+                            <td>UTC +08:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Asia/Kuala_Lumpur')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>229</td>
+                            <td>MY</td>
+                            <td>Malaysia</td>
+                            <td>Asia/Kuching</td>
+                            <td>UTC +08:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Asia/Kuching')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>230</td>
+                            <td>MV</td>
+                            <td>Maldives</td>
+                            <td>Indian/Maldives</td>
+                            <td>UTC +05:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Indian/Maldives')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>231</td>
+                            <td>ML</td>
+                            <td>Mali</td>
+                            <td>Africa/Bamako</td>
+                            <td>UTC</td>
+                            <td><button class="btn btn-primary" onclick="tz('Africa/Bamako')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>232</td>
+                            <td>MT</td>
+                            <td>Malta</td>
+                            <td>Europe/Malta</td>
+                            <td>UTC +02:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Europe/Malta')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>233</td>
+                            <td>MH</td>
+                            <td>Marshall Islands</td>
+                            <td>Pacific/Kwajalein</td>
+                            <td>UTC +12:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Pacific/Kwajalein')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>234</td>
+                            <td>MH</td>
+                            <td>Marshall Islands</td>
+                            <td>Pacific/Majuro</td>
+                            <td>UTC +12:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Pacific/Majuro')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>235</td>
+                            <td>MQ</td>
+                            <td>Martinique</td>
+                            <td>America/Martinique</td>
+                            <td>UTC -04:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Martinique')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>236</td>
+                            <td>MR</td>
+                            <td>Mauritania</td>
+                            <td>Africa/Nouakchott</td>
+                            <td>UTC</td>
+                            <td><button class="btn btn-primary" onclick="tz('Africa/Nouakchott')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>237</td>
+                            <td>MU</td>
+                            <td>Mauritius</td>
+                            <td>Indian/Mauritius</td>
+                            <td>UTC +04:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Indian/Mauritius')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>238</td>
+                            <td>YT</td>
+                            <td>Mayotte</td>
+                            <td>Indian/Mayotte</td>
+                            <td>UTC +03:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Indian/Mayotte')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>239</td>
+                            <td>MX</td>
+                            <td>Mexico</td>
+                            <td>America/Bahia_Banderas</td>
+                            <td>UTC -05:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Bahia_Banderas')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>240</td>
+                            <td>MX</td>
+                            <td>Mexico</td>
+                            <td>America/Cancun</td>
+                            <td>UTC -05:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Cancun')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>241</td>
+                            <td>MX</td>
+                            <td>Mexico</td>
+                            <td>America/Chihuahua</td>
+                            <td>UTC -06:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Chihuahua')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>242</td>
+                            <td>MX</td>
+                            <td>Mexico</td>
+                            <td>America/Hermosillo</td>
+                            <td>UTC -07:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Hermosillo')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>243</td>
+                            <td>MX</td>
+                            <td>Mexico</td>
+                            <td>America/Matamoros</td>
+                            <td>UTC -05:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Matamoros')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>244</td>
+                            <td>MX</td>
+                            <td>Mexico</td>
+                            <td>America/Mazatlan</td>
+                            <td>UTC -06:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Mazatlan')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>245</td>
+                            <td>MX</td>
+                            <td>Mexico</td>
+                            <td>America/Merida</td>
+                            <td>UTC -05:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Merida')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>246</td>
+                            <td>MX</td>
+                            <td>Mexico</td>
+                            <td>America/Mexico_City</td>
+                            <td>UTC -05:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Mexico_City')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>247</td>
+                            <td>MX</td>
+                            <td>Mexico</td>
+                            <td>America/Monterrey</td>
+                            <td>UTC -05:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Monterrey')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>248</td>
+                            <td>MX</td>
+                            <td>Mexico</td>
+                            <td>America/Ojinaga</td>
+                            <td>UTC -06:00</td>'
+                            <td><button class="btn btn-primary" onclick="tz('America/Ojinaga')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>249</td>
+                            <td>MX</td>
+                            <td>Mexico</td>
+                            <td>America/Tijuana</td>
+                            <td>UTC -07:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Tijuana')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>250</td>
+                            <td>FM</td>
+                            <td>Micronesia, Federated States of</td>
+                            <td>Pacific/Chuuk</td>
+                            <td>UTC +10:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Pacific/Chuuk')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>251</td>
+                            <td>FM</td>
+                            <td>Micronesia, Federated States of</td>
+                            <td>Pacific/Kosrae</td>
+                            <td>UTC +11:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Pacific/Kosrae')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>252</td>
+                            <td>FM</td>
+                            <td>Micronesia, Federated States of</td>
+                            <td>Pacific/Pohnpei</td>
+                            <td>UTC +11:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Pacific/Pohnpei')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>253</td>
+                            <td>MD</td>
+                            <td>Moldova, Republic of</td>
+                            <td>Europe/Chisinau</td>
+                            <td>UTC +03:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Europe/Chisinau')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>254</td>
+                            <td>MC</td>
+                            <td>Monaco</td>
+                            <td>Europe/Monaco</td>
+                            <td>UTC +02:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Europe/Monaco')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>255</td>
+                            <td>MN</td>
+                            <td>Mongolia</td>
+                            <td>Asia/Choibalsan</td>
+                            <td>UTC +08:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Asia/Choibalsan')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>256</td>
+                            <td>MN</td>
+                            <td>Mongolia</td>
+                            <td>Asia/Hovd</td>
+                            <td>UTC +07:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Asia/Hovd')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>257</td>
+                            <td>MN</td>
+                            <td>Mongolia</td>
+                            <td>Asia/Ulaanbaatar</td>
+                            <td>UTC +08:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Asia/Ulaanbaatar')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>258</td>
+                            <td>ME</td>
+                            <td>Montenegro</td>
+                            <td>Europe/Podgorica</td>
+                            <td>UTC +02:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Europe/Podgorica')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>259</td>
+                            <td>MS</td>
+                            <td>Montserrat</td>
+                            <td>America/Montserrat</td>
+                            <td>UTC -04:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Montserrat')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>260</td>
+                            <td>MA</td>
+                            <td>Morocco</td>
+                            <td>Africa/Casablanca</td>
+                            <td>UTC</td>
+                            <td><button class="btn btn-primary" onclick="tz('Africa/Casablanca')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>261</td>
+                            <td>MZ</td>
+                            <td>Mozambique</td>
+                            <td>Africa/Maputo</td>
+                            <td>UTC +02:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Africa/Maputo')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>262</td>
+                            <td>MM</td>
+                            <td>Myanmar</td>
+                            <td>Asia/Yangon</td>
+                            <td>UTC +06:30</td>
+                            <td><button class="btn btn-primary" onclick="tz('Asia/Yangon')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>263</td>
+                            <td>NA</td>
+                            <td>Namibia</td>
+                            <td>Africa/Windhoek</td>
+                            <td>UTC +02:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Africa/Windhoek')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>264</td>
+                            <td>NR</td>
+                            <td>Nauru</td>
+                            <td>Pacific/Nauru</td>
+                            <td>UTC +12:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Pacific/Nauru')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>265</td>
+                            <td>NP</td>
+                            <td>Nepal</td>
+                            <td>Asia/Kathmandu</td>
+                            <td>UTC +05:45</td>
+                            <td><button class="btn btn-primary" onclick="tz('Asia/Kathmandu')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>266</td>
+                            <td>NL</td>
+                            <td>Netherlands</td>
+                            <td>Europe/Amsterdam</td>
+                            <td>UTC +02:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Europe/Amsterdam')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>267</td>
+                            <td>NC</td>
+                            <td>New Caledonia</td>
+                            <td>Pacific/Noumea</td>
+                            <td>UTC +11:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Pacific/Noumea')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>268</td>
+                            <td>NZ</td>
+                            <td>New Zealand</td>
+                            <td>Pacific/Auckland</td>
+                            <td>UTC +12:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Pacific/Auckland')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>269</td>
+                            <td>NZ</td>
+                            <td>New Zealand</td>
+                            <td>Pacific/Chatham</td>
+                            <td>UTC +12:45</td>
+                            <td><button class="btn btn-primary" onclick="tz('Pacific/Chatham')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>270</td>
+                            <td>NI</td>
+                            <td>Nicaragua</td>
+                            <td>America/Managua</td>
+                            <td>UTC -06:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Managua')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>271</td>
+                            <td>NE</td>
+                            <td>Niger</td>
+                            <td>Africa/Niamey</td>
+                            <td>UTC +01:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Africa/Niamey')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>272</td>
+                            <td>NG</td>
+                            <td>Nigeria</td>
+                            <td>Africa/Lagos</td>
+                            <td>UTC +01:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Africa/Lagos')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>273</td>
+                            <td>NU</td>
+                            <td>Niue</td>
+                            <td>Pacific/Niue</td>
+                            <td>UTC -11:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Pacific/Niue')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>274</td>
+                            <td>NF</td>
+                            <td>Norfolk Island</td>
+                            <td>Pacific/Norfolk</td>
+                            <td>UTC +11:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Pacific/Norfolk')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>275</td>
+                            <td>MP</td>
+                            <td>Northern Mariana Islands</td>
+                            <td>Pacific/Saipan</td>
+                            <td>UTC +10:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Pacific/Saipan')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>276</td>
+                            <td>NO</td>
+                            <td>Norway</td>
+                            <td>Europe/Oslo</td>
+                            <td>UTC +02:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Europe/Oslo')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>277</td>
+                            <td>OM</td>
+                            <td>Oman</td>
+                            <td>Asia/Muscat</td>
+                            <td>UTC +04:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Asia/Muscat')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>278</td>
+                            <td>PK</td>
+                            <td>Pakistan</td>
+                            <td>Asia/Karachi</td>
+                            <td>UTC +05:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Asia/Karachi')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>279</td>
+                            <td>PW</td>
+                            <td>Palau</td>
+                            <td>Pacific/Palau</td>
+                            <td>UTC +09:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Pacific/Palau')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>280</td>
+                            <td>PS</td>
+                            <td>Palestine, State of</td>
+                            <td>Asia/Gaza</td>
+                            <td>UTC +03:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Asia/Gaza')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>281</td>
+                            <td>PS</td>
+                            <td>Palestine, State of</td>
+                            <td>Asia/Hebron</td>
+                            <td>UTC +03:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Asia/Hebron')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>281</td>
+                            <td>PA</td>
+                            <td>Panama</td>
+                            <td>America/Panama</td>
+                            <td>UTC -05:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Panama')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>282</td>
+                            <td>PG</td>
+                            <td>Papua New Guinea</td>
+                            <td>Pacific/Bougainville</td>
+                            <td>UTC +11:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Pacific/Bougainville')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>283</td>
+                            <td>PG</td>
+                            <td>Papua New Guinea</td>
+                            <td>Pacific/Port_Moresby</td>
+                            <td>UTC +10:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Pacific/Port_Moresby')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>284</td>
+                            <td>PY</td>
+                            <td>Paraguay</td>
+                            <td>America/Asuncion</td>
+                            <td>UTC -04:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Asuncion')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>285</td>
+                            <td>PE</td>
+                            <td>Peru</td>
+                            <td>America/Lima</td>
+                            <td>UTC -05:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Lima')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>286</td>
+                            <td>PH</td>
+                            <td>Philippines</td>
+                            <td>Asia/Manila</td>
+                            <td>UTC +08:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Asia/Manila')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>287</td>
+                            <td>PN</td>
+                            <td>Pitcairn</td>
+                            <td>Pacific/Pitcairn</td>
+                            <td>UTC -08:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Pacific/Pitcairn')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>288</td>
+                            <td>PL</td>
+                            <td>Poland</td>
+                            <td>Europe/Warsaw</td>
+                            <td>UTC +02:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Europe/Warsaw')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>289</td>
+                            <td>PT</td>
+                            <td>Portugal</td>
+                            <td>Atlantic/Azores</td>
+                            <td>UTC</td>
+                            <td><button class="btn btn-primary" onclick="tz('Atlantic/Azores')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>290</td>
+                            <td>PT</td>
+                            <td>Portugal</td>
+                            <td>Atlantic/Madeira</td>
+                            <td>UTC +01:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Atlantic/Madeira')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>291</td>
+                            <td>PT</td>
+                            <td>Portugal</td>
+                            <td>Europe/Lisbon</td>
+                            <td>UTC +01:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Europe/Lisbon')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>292</td>
+                            <td>PR</td>
+                            <td>Puerto Rico</td>
+                            <td>America/Puerto_Rico</td>
+                            <td>UTC -04:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Puerto_Rico')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>293</td>
+                            <td>QA</td>
+                            <td>Qatar</td>
+                            <td>Asia/Qatar</td>
+                            <td>UTC +03:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Asia/Qatar')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>294</td>
+                            <td>RO</td>
+                            <td>Romania</td>
+                            <td>Europe/Bucharest</td>
+                            <td>UTC +03:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Europe/Bucharest')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>295</td>
+                            <td>RU</td>
+                            <td>Russian Federation</td>
+                            <td>Asia/Anadyr</td>
+                            <td>UTC +12:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Asia/Anadyr')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>296</td>
+                            <td>RU</td>
+                            <td>Russian Federation</td>
+                            <td>Asia/Barnaul</td>
+                            <td>UTC +07:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Asia/Barnaul')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>297</td>
+                            <td>RU</td>
+                            <td>Russian Federation</td>
+                            <td>Asia/Chita</td>
+                            <td>UTC +09:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Asia/Chita')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>298</td>
+                            <td>RU</td>
+                            <td>Russian Federation</td>
+                            <td>Asia/Irkutsk</td>
+                            <td>UTC +08:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Asia/Irkutsk')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>299</td>
+                            <td>RU</td>
+                            <td>Russian Federation</td>
+                            <td>Asia/Kamchatka</td>
+                            <td>UTC +12:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Asia/Kamchatka')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>300</td>
+                            <td>RU</td>
+                            <td>Russian Federation</td>
+                            <td>Asia/Khandyga</td>
+                            <td>UTC +09:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Asia/Khandyga')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>301</td>
+                            <td>RU</td>
+                            <td>Russian Federation</td>
+                            <td>Asia/Krasnoyarsk</td>
+                            <td>UTC +07:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Asia/Krasnoyarsk')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>302</td>
+                            <td>RU</td>
+                            <td>Russian Federation</td>
+                            <td>Asia/Magadan</td>
+                            <td>UTC +11:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Asia/Magadan')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>303</td>
+                            <td>RU</td>
+                            <td>Russian Federation</td>
+                            <td>Asia/Novokuznetsk</td>
+                            <td>UTC +07:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Asia/Novokuznetsk')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>304</td>
+                            <td>RU</td>
+                            <td>Russian Federation</td>
+                            <td>Asia/Novosibirsk</td>
+                            <td>UTC +07:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Asia/Novosibirsk')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>305</td>
+                            <td>RU</td>
+                            <td>Russian Federation</td>
+                            <td>Asia/Omsk</td>
+                            <td>UTC +06:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Asia/Omsk')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>306</td>
+                            <td>RU</td>
+                            <td>Russian Federation</td>
+                            <td>Asia/Sakhalin</td>
+                            <td>UTC +11:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Asia/Sakhalin')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>307</td>
+                            <td>RU</td>
+                            <td>Russian Federation</td>
+                            <td>Asia/Srednekolymsk</td>
+                            <td>UTC +11:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Asia/Srednekolymsk')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>308</td>
+                            <td>RU</td>
+                            <td>Russian Federation</td>
+                            <td>Asia/Tomsk</td>
+                            <td>UTC +07:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Asia/Tomsk')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>309</td>
+                            <td>RU</td>
+                            <td>Russian Federation</td>
+                            <td>Asia/Ust-Nera</td>
+                            <td>UTC +10:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Asia/Ust-Nera')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>310</td>
+                            <td>RU</td>
+                            <td>Russian Federation</td>
+                            <td>Asia/Vladivostok</td>
+                            <td>UTC +10:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Asia/Vladivostok')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>311</td>
+                            <td>RU</td>
+                            <td>Russian Federation</td>
+                            <td>Asia/Yakutsk</td>
+                            <td>UTC +09:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Asia/Yakutsk')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>312</td>
+                            <td>RU</td>
+                            <td>Russian Federation</td>
+                            <td>Asia/Yekaterinburg</td>
+                            <td>UTC +05:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Asia/Yekaterinburg')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>313</td>
+                            <td>RU</td>
+                            <td>Russian Federation</td>
+                            <td>Europe/Astrakhan</td>
+                            <td>UTC +04:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Europe/Astrakhan')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>314</td>
+                            <td>RU</td>
+                            <td>Russian Federation</td>
+                            <td>Europe/Kaliningrad</td>
+                            <td>UTC +02:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Europe/Kaliningrad')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>315</td>
+                            <td>RU</td>
+                            <td>Russian Federation</td>
+                            <td>Europe/Kirov</td>
+                            <td>UTC +03:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Europe/Kirov')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>316</td>
+                            <td>RU</td>
+                            <td>Russian Federation</td>
+                            <td>Europe/Moscow</td>
+                            <td>UTC +03:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Europe/Moscow')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>317</td>
+                            <td>RU</td>
+                            <td>Russian Federation</td>
+                            <td>Europe/Samara</td>
+                            <td>UTC +04:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Europe/Samara')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>318</td>
+                            <td>RU</td>
+                            <td>Russian Federation</td>
+                            <td>Europe/Saratov</td>
+                            <td>UTC +04:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Europe/Saratov')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>319</td>
+                            <td>RU</td>
+                            <td>Russian Federation</td>
+                            <td>Europe/Ulyanovsk</td>
+                            <td>UTC +04:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Europe/Ulyanovsk')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>320</td>
+                            <td>RU</td>
+                            <td>Russian Federation</td>
+                            <td>Europe/Volgograd</td>
+                            <td>UTC +03:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Europe/Volgograd')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>321</td>
+                            <td>RW</td>
+                            <td>Rwanda</td>
+                            <td>Africa/Kigali</td>
+                            <td>UTC +02:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Africa/Kigali')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>322</td>
+                            <td>RE</td>
+                            <td>Réunion</td>
+                            <td>Indian/Reunion</td>
+                            <td>UTC +04:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Indian/Reunion')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>323</td>
+                            <td>BL</td>
+                            <td>Saint Barthélemy</td>
+                            <td>America/St_Barthelemy</td>
+                            <td>UTC -04:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/St_Barthelemy')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>324</td>
+                            <td>SH</td>
+                            <td>Saint Helena, Ascension and Tristan da Cunha</td>
+                            <td>Atlantic/St_Helena</td>
+                            <td>UTC</td>
+                            <td><button class="btn btn-primary" onclick="tz('Atlantic/St_Helena')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>325</td>
+                            <td>KN</td>
+                            <td>Saint Kitts and Nevis</td>
+                            <td>America/St_Kitts</td>
+                            <td>UTC -04:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/St_Kitts')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>326</td>
+                            <td>LC</td>
+                            <td>Saint Lucia</td>
+                            <td>America/St_Lucia</td>
+                            <td>UTC -04:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/St_Lucia')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>327</td>
+                            <td>MF</td>
+                            <td>Saint Martin (French part)</td>
+                            <td>America/Marigot</td>
+                            <td>UTC -04:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Marigot')">Select</button></td>
+                        </tr>
+                        <tr><td>328</td>
+                            <td>PM</td>
+                            <td>Saint Pierre and Miquelon</td>
+                            <td>America/Miquelon</td>
+                            <td>UTC -02:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Miquelon')">Select</button></td>
+                        </tr>
+                        <tr><td>329</td>
+                            <td>VC</td>
+                            <td>Saint Vincent and the Grenadines</td>
+                            <td>America/St_Vincent</td>
+                            <td>UTC -04:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/St_Vincent')">Select</button></td>
+                        </tr>
+                        <tr><td>330</td>
+                            <td>WS</td>
+                            <td>Samoa</td>
+                            <td>Pacific/Apia</td>
+                            <td>UTC +13:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Pacific/Apia')">Select</button></td>
+                        </tr>
+                        <tr><td>331</td>
+                            <td>SM</td>
+                            <td>San Marino</td>
+                            <td>Europe/San_Marino</td>
+                            <td>UTC +02:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Europe/San_Marino')">Select</button></td>
+                        </tr>
+                        <tr><td>332</td>
+                            <td>ST</td>
+                            <td>Sao Tome and Principe</td>
+                            <td>Africa/Sao_Tome</td>
+                            <td>UTC</td>
+                            <td><button class="btn btn-primary" onclick="tz('Africa/Sao_Tome')">Select</button></td>
+                        </tr>
+                        <tr><td>333</td>
+                            <td>SA</td>
+                            <td>Saudi Arabia</td>
+                            <td>Asia/Riyadh</td>
+                            <td>UTC +03:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Asia/Riyadh')">Select</button></td>
+                        </tr>
+                        <tr><td>334</td>
+                            <td>SN</td>
+                            <td>Senegal</td>
+                            <td>Africa/Dakar</td>
+                            <td>UTC</td>
+                            <td><button class="btn btn-primary" onclick="tz('Africa/Dakar')">Select</button></td>
+                        </tr>
+                        <tr><td>335</td>
+                            <td>RS</td>
+                            <td>Serbia</td>
+                            <td>Europe/Belgrade</td>
+                            <td>UTC +02:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Europe/Belgrade')">Select</button></td>
+                        </tr>
+                        <tr><td>336</td>
+                            <td>SC</td>
+                            <td>Seychelles</td>
+                            <td>Indian/Mahe</td>
+                            <td>UTC +04:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Indian/Mahe')">Select</button></td>
+                        </tr>
+                        <tr><td>337</td>
+                            <td>SL</td>
+                            <td>Sierra Leone</td>
+                            <td>Africa/Freetown</td>
+                            <td>UTC</td>
+                            <td><button class="btn btn-primary" onclick="tz('Africa/Freetown')">Select</button></td>
+                        </tr>
+                        <tr><td>338</td>
+                            <td>SG</td>
+                            <td>Singapore</td>
+                            <td>Asia/Singapore</td>
+                            <td>UTC +08:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Asia/Singapore')">Select</button></td>
+                        </tr>
+                        <tr><td>339</td>
+                            <td>SX</td>
+                            <td>Sint Maarten (Dutch part)</td>
+                            <td>America/Lower_Princes</td>
+                            <td>UTC -04:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Lower_Princes')">Select</button></td>
+                        </tr>
+                        <tr><td>340</td>
+                            <td>SK</td>
+                            <td>Slovakia</td>
+                            <td>Europe/Bratislava</td>
+                            <td>UTC +02:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Europe/Bratislava')">Select</button></td>
+                        </tr>
+                        <tr><td>341</td>
+                            <td>SI</td>
+                            <td>Slovenia</td>
+                            <td>Europe/Ljubljana</td>
+                            <td>UTC +02:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Europe/Ljubljana')">Select</button></td>
+                        </tr>
+                        <tr><td>342</td>
+                            <td>SB</td>
+                            <td>Solomon Islands</td>
+                            <td>Pacific/Guadalcanal</td>
+                            <td>UTC +11:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Pacific/Guadalcanal')">Select</button></td>
+                        </tr>
+                        <tr><td>343</td>
+                            <td>SO</td>
+                            <td>Somalia</td>
+                            <td>Africa/Mogadishu</td>
+                            <td>UTC +03:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Africa/Mogadishu')">Select</button></td>
+                        </tr>
+                        <tr><td>344</td>
+                            <td>ZA</td>
+                            <td>South Africa</td>
+                            <td>Africa/Johannesburg</td>
+                            <td>UTC +02:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Africa/Johannesburg')">Select</button></td>
+                        </tr>
+                        <tr><td>345</td>
+                            <td>GS</td>
+                            <td>South Georgia and the South Sandwich Islands</td>
+                            <td>Atlantic/South_Georgia</td>
+                            <td>UTC -02:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Atlantic/South_Georgia')">Select</button></td>
+                        </tr>
+                        <tr><td>346</td>
+                            <td>SS</td>
+                            <td>South Sudan</td>
+                            <td>Africa/Juba</td>
+                            <td>UTC +02:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Africa/Juba')">Select</button></td>
+                        </tr>
+                        <tr><td>347</td>
+                            <td>ES</td>
+                            <td>Spain</td>
+                            <td>Africa/Ceuta</td>
+                            <td>UTC +02:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Africa/Ceuta')">Select</button></td>
+                        </tr>
+                        <tr><td>348</td>
+                            <td>ES</td>
+                            <td>Spain</td>
+                            <td>Atlantic/Canary</td>
+                            <td>UTC +01:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Atlantic/Canary')">Select</button></td>
+                        </tr>
+                        <tr><td>349</td>
+                            <td>ES</td>
+                            <td>Spain</td>
+                            <td>Europe/Madrid</td>
+                            <td>UTC +02:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Europe/Madrid')">Select</button></td>
+                        </tr>
+                        <tr><td>350</td>
+                            <td>LK</td>
+                            <td>Sri Lanka</td>
+                            <td>Asia/Colombo</td>
+                            <td>UTC +05:30</td>
+                            <td><button class="btn btn-primary" onclick="tz('Asia/Colombo')">Select</button></td>
+                        </tr>
+                        <tr><td>351</td>
+                            <td>SD</td>
+                            <td>Sudan</td>
+                            <td>Africa/Khartoum</td>
+                            <td>UTC +02:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Africa/Khartoum')">Select</button></td>
+                        </tr>
+                        <tr><td>352</td>
+                            <td>SR</td>
+                            <td>Suriname</td>
+                            <td>America/Paramaribo</td>
+                            <td>UTC -03:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Paramaribo')">Select</button></td>
+                        </tr>
+                        <tr><td>353</td>
+                            <td>SJ</td>
+                            <td>Svalbard and Jan Mayen</td>
+                            <td>Arctic/Longyearbyen</td>
+                            <td>UTC +02:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Arctic/Longyearbyen')">Select</button></td>
+                        </tr>
+                        <tr><td>354</td>
+                            <td>SZ</td>
+                            <td>Swaziland</td>
+                            <td>Africa/Mbabane</td>
+                            <td>UTC +02:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Africa/Mbabane')">Select</button></td>
+                        </tr>
+                        <tr><td>355</td>
+                            <td>SE</td>
+                            <td>Sweden</td>
+                            <td>Europe/Stockholm</td>
+                            <td>UTC +02:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Europe/Stockholm')">Select</button></td>
+                        </tr>
+                        <tr><td>356</td>
+                            <td>CH</td>
+                            <td>Switzerland</td>
+                            <td>Europe/Zurich</td>
+                            <td>UTC +02:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Europe/Zurich')">Select</button></td>
+                        </tr>
+                        <tr><td>357</td>
+                            <td>SY</td>
+                            <td>Syrian Arab Republic</td>
+                            <td>Asia/Damascus</td>
+                            <td>UTC +03:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Asia/Damascus')">Select</button></td>
+                        </tr>
+                        <tr><td>358</td>
+                            <td>TW</td>
+                            <td>Taiwan, Province of China</td>
+                            <td>Asia/Taipei</td>
+                            <td>UTC +08:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Asia/Taipei')">Select</button></td>
+                        </tr>
+                        <tr><td>359</td>
+                            <td>TJ</td>
+                            <td>Tajikistan</td>
+                            <td>Asia/Dushanbe</td>
+                            <td>UTC +05:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Asia/Dushanbe')">Select</button></td>
+                        </tr>
+                        <tr><td>360</td>
+                            <td>TZ</td>
+                            <td>Tanzania, United Republic of</td>
+                            <td>Africa/Dar_es_Salaam</td>
+                            <td>UTC +03:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Africa/Dar_es_Salaam')">Select</button></td>
+                        </tr>
+                        <tr><td>361</td>
+                            <td>TH</td>
+                            <td>Thailand</td>
+                            <td>Asia/Bangkok</td>
+                            <td>UTC +07:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Asia/Bangkok')">Select</button></td>
+                        </tr>
+                        <tr><td>362</td>
+                            <td>TL</td>
+                            <td>Timor-Leste</td>
+                            <td>Asia/Dili</td>
+                            <td>UTC +09:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Asia/Dili')">Select</button></td>
+                        </tr>
+                        <tr><td>363</td>
+                            <td>TG</td>
+                            <td>Togo</td>
+                            <td>Africa/Lome</td>
+                            <td>UTC</td>
+                            <td><button class="btn btn-primary" onclick="tz('Africa/Lome')">Select</button></td>
+                        </tr>
+                        <tr><td>364</td>
+                            <td>TK</td>
+                            <td>Tokelau</td>
+                            <td>Pacific/Fakaofo</td>
+                            <td>UTC +13:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Pacific/Fakaofo')">Select</button></td>
+                        </tr>
+                        <tr><td>365</td>
+                            <td>TO</td>
+                            <td>Tonga</td>
+                            <td>Pacific/Tongatapu</td>
+                            <td>UTC +13:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Pacific/Tongatapu')">Select</button></td>
+                        </tr>
+                        <tr><td>366</td>
+                            <td>TT</td>
+                            <td>Trinidad and Tobago</td>
+                            <td>America/Port_of_Spain</td>
+                            <td>UTC -04:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Port_of_Spain')">Select</button></td>
+                        </tr>
+                        <tr><td>367</td>
+                            <td>TN</td>
+                            <td>Tunisia</td>
+                            <td>Africa/Tunis</td>
+                            <td>UTC +01:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Africa/Tunis')">Select</button></td>
+                        </tr>
+                        <tr><td>368</td>
+                            <td>TR</td>
+                            <td>Turkey</td>
+                            <td>Europe/Istanbul</td>
+                            <td>UTC +03:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Europe/Istanbul')">Select</button></td>
+                        </tr>
+                        <tr><td>369</td>
+                            <td>TM</td>
+                            <td>Turkmenistan</td>
+                            <td>Asia/Ashgabat</td>
+                            <td>UTC +05:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Asia/Ashgabat')">Select</button></td>
+                        </tr>
+                        <tr><td>370</td>
+                            <td>TC</td>
+                            <td>Turks and Caicos Islands</td>
+                            <td>America/Grand_Turk</td>
+                            <td>UTC -04:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Grand_Turk')">Select</button></td>
+                        </tr>
+                        <tr><td>371</td>
+                            <td>TV</td>
+                            <td>Tuvalu</td>
+                            <td>Pacific/Funafuti</td>
+                            <td>UTC +12:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Pacific/Funafuti')">Select</button></td>
+                        </tr>
+                        <tr><td>372</td>
+                            <td>UG</td>
+                            <td>Uganda</td>
+                            <td>Africa/Kampala</td>
+                            <td>UTC +03:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Africa/Kampala')">Select</button></td>
+                        </tr>
+                        <tr><td>373</td>
+                            <td>UA</td>
+                            <td>Ukraine</td>
+                            <td>Europe/Kiev</td>
+                            <td>UTC +03:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Europe/Kiev')">Select</button></td>
+                        </tr>
+                        <tr><td>374</td>
+                            <td>UA</td>
+                            <td>Ukraine</td>
+                            <td>Europe/Simferopol</td>
+                            <td>UTC +03:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Europe/Simferopol')">Select</button></td>
+                        </tr>
+                        <tr><td>375</td>
+                            <td>UA</td>
+                            <td>Ukraine</td>
+                            <td>Europe/Uzhgorod</td>
+                            <td>UTC +03:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Europe/Uzhgorod')">Select</button></td>
+                        </tr>
+                        <tr><td>376</td>
+                            <td>UA</td>
+                            <td>Ukraine</td>
+                            <td>Europe/Zaporozhye</td>
+                            <td>UTC +03:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Europe/Zaporozhye')">Select</button></td>
+                        </tr>
+                        <tr><td>377</td>
+                            <td>AE</td>
+                            <td>United Arab Emirates</td>
+                            <td>Asia/Dubai</td>
+                            <td>UTC +04:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Asia/Dubai')">Select</button></td>
+                        </tr>
+                        <tr><td>378</td>
+                            <td>GB</td>
+                            <td>United Kingdom</td>
+                            <td>Europe/London</td>
+                            <td>UTC +01:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Europe/London')">Select</button></td>
+                        </tr>
+                        <tr><td>379</td>
+                            <td>US</td>
+                            <td>United States</td>
+                            <td>America/Adak</td>
+                            <td>UTC -09:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Adak')">Select</button></td>
+                        </tr>
+                        <tr><td>380</td>
+                            <td>US</td>
+                            <td>United States</td>
+                            <td>America/Anchorage</td>
+                            <td>UTC -08:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Anchorage')">Select</button></td>
+                        </tr>
+                        <tr><td>381</td>
+                            <td>US</td>
+                            <td>United States</td>
+                            <td>America/Boise</td>
+                            <td>UTC -06:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Boise')">Select</button></td>
+                        </tr>
+                        <tr><td>382</td>
+                            <td>US</td>
+                            <td>United States</td>
+                            <td>America/Chicago</td>
+                            <td>UTC -05:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Chicago')">Select</button></td>
+                        </tr>
+                        <tr><td>383</td>
+                            <td>US</td>
+                            <td>United States</td>
+                            <td>America/Denver</td>
+                            <td>UTC -06:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Denver')">Select</button></td>
+                        </tr>
+                        <tr><td>384</td>
+                            <td>US</td>
+                            <td>United States</td>
+                            <td>America/Detroit</td>
+                            <td>UTC -04:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Detroit')">Select</button></td>
+                        </tr>
+                        <tr><td>385</td>
+                            <td>US</td>
+                            <td>United States</td>
+                            <td>America/Indiana/Indianapolis</td>
+                            <td>UTC -04:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Indiana/Indianapolis')">Select</button></td>
+                        </tr>
+                        <tr><td>386</td>
+                            <td>US</td>
+                            <td>United States</td>
+                            <td>America/Indiana/Knox</td>
+                            <td>UTC -05:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Indiana/Knox')">Select</button></td>
+                        </tr>
+                        <tr><td>387</td>
+                            <td>US</td>
+                            <td>United States</td>
+                            <td>America/Indiana/Marengo</td>
+                            <td>UTC -04:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Indiana/Marengo')">Select</button></td>
+                        </tr>
+                        <tr><td>388</td>
+                            <td>US</td>
+                            <td>United States</td>
+                            <td>America/Indiana/Petersburg</td>
+                            <td>UTC -04:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Indiana/Petersburg')">Select</button></td>
+                        </tr>
+                        <tr><td>389</td>
+                            <td>US</td>
+                            <td>United States</td>
+                            <td>America/Indiana/Tell_City</td>
+                            <td>UTC -05:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Indiana/Tell_City')">Select</button></td>
+                        </tr>
+                        <tr><td>390</td>
+                            <td>US</td>
+                            <td>United States</td>
+                            <td>America/Indiana/Vevay</td>
+                            <td>UTC -04:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Indiana/Vevay')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>391</td>
+                            <td>US</td>
+                            <td>United States</td>
+                            <td>America/Indiana/Vincennes</td>
+                            <td>UTC -04:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Indiana/Vincennes')">Select</button></td>
+                        </tr>
+                        <tr><td>392</td>
+                            <td>US</td>
+                            <td>United States</td>
+                            <td>America/Indiana/Winamac</td>
+                            <td>UTC -04:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Indiana/Winamac')">Select</button></td>
+                        </tr>
+                        <tr><td>393</td>
+                            <td>US</td>
+                            <td>United States</td>
+                            <td>America/Juneau</td>
+                            <td>UTC -08:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Juneau')">Select</button></td>
+                        </tr>
+                        <tr><td>394</td>
+                            <td>US</td>
+                            <td>United States</td>
+                            <td>America/Kentucky/Louisville</td>
+                            <td>UTC -04:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Kentucky/Louisville')">Select</button></td>
+                        </tr>
+                        <tr><td>395</td>
+                            <td>US</td>
+                            <td>United States</td>
+                            <td>America/Kentucky/Monticello</td>
+                            <td>UTC -04:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Kentucky/Monticello')">Select</button></td>
+                        </tr>
+                        <tr><td>396</td>
+                            <td>US</td>
+                            <td>United States</td>
+                            <td>America/Los_Angeles</td>
+                            <td>UTC -07:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Los_Angeles')">Select</button></td>
+                        </tr>
+                        <tr><td>397</td>
+                            <td>US</td>
+                            <td>United States</td>
+                            <td>America/Menominee</td>
+                            <td>UTC -05:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Menominee')">Select</button></td>
+                        </tr>
+                        <tr><td>398</td>
+                            <td>US</td>
+                            <td>United States</td>
+                            <td>America/Metlakatla</td>
+                            <td>UTC -08:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Metlakatla')">Select</button></td>
+                        </tr>
+                        <tr><td>399</td>
+                            <td>US</td>
+                            <td>United States</td>
+                            <td>America/New_York</td>
+                            <td>UTC -04:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/New_York')">Select</button></td>
+                        </tr>
+                        <tr><td>400</td>
+                            <td>US</td>
+                            <td>United States</td>
+                            <td>America/Nome</td>
+                            <td>UTC -08:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Nome')">Select</button></td>
+                        </tr>
+                        <tr><td>401</td>
+                            <td>US</td>
+                            <td>United States</td>
+                            <td>America/North_Dakota/Beulah</td>
+                            <td>UTC -05:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/North_Dakota/Beulah')">Select</button></td>
+                        </tr>
+                        <tr><td>402</td>
+                            <td>US</td>
+                            <td>United States</td>
+                            <td>America/North_Dakota/Center</td>
+                            <td>UTC -05:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/North_Dakota/Center')">Select</button></td>
+                        </tr>
+                        <tr><td>403</td>
+                            <td>US</td>
+                            <td>United States</td>
+                            <td>America/North_Dakota/New_Salem</td>
+                            <td>UTC -05:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/North_Dakota/New_Salem')">Select</button></td>
+                        </tr>
+                        <tr><td>404</td>
+                            <td>US</td>
+                            <td>United States</td>
+                            <td>America/Phoenix</td>
+                            <td>UTC -07:00</td><td><button class="btn btn-primary" onclick="tz('America/Phoenix')">Select</button></td>
+                        </tr>
+                        <tr><td>405</td>
+                            <td>US</td>
+                            <td>United States</td>
+                            <td>America/Sitka</td>
+                            <td>UTC -08:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Sitka')">Select</button></td>
+                        </tr>
+                        <tr><td>406</td>
+                            <td>US</td>
+                            <td>United States</td>
+                            <td>America/Yakutat</td>
+                            <td>UTC -08:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Yakutat')">Select</button></td>
+                        </tr>
+                        <tr><td>407</td>
+                            <td>US</td>
+                            <td>United States</td>
+                            <td>Pacific/Honolulu</td>
+                            <td>UTC -10:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Pacific/Honolulu')">Select</button></td>
+                        </tr>
+                        <tr><td>408</td>
+                            <td>UM</td>
+                            <td>United States Minor Outlying Islands</td>
+                            <td>Pacific/Midway</td>
+                            <td>UTC -11:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Pacific/Midway')">Select</button></td>
+                        </tr>
+                        <tr><td>409</td>
+                            <td>UM</td>
+                            <td>United States Minor Outlying Islands</td>
+                            <td>Pacific/Wake</td>
+                            <td>UTC +12:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Pacific/Wake')">Select</button></td>
+                        </tr>
+                        <tr><td>410</td>
+                            <td>UY</td>
+                            <td>Uruguay</td>
+                            <td>America/Montevideo</td>
+                            <td>UTC -03:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Montevideo')">Select</button></td>
+                        </tr>
+                        <tr><td>411</td>
+                            <td>UZ</td>
+                            <td>Uzbekistan</td>
+                            <td>Asia/Samarkand</td>
+                            <td>UTC +05:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Asia/Samarkand')">Select</button></td>
+                        </tr>
+                        <tr><td>412</td>
+                            <td>UZ</td>
+                            <td>Uzbekistan</td>
+                            <td>Asia/Tashkent</td>
+                            <td>UTC +05:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Asia/Tashkent')">Select</button></td>
+                        </tr>
+                        <tr><td>413</td>
+                            <td>VU</td>
+                            <td>Vanuatu</td>
+                            <td>Pacific/Efate</td>
+                            <td>UTC +11:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Pacific/Efate')">Select</button></td>
+                        </tr>
+                        <tr><td>414</td>
+                            <td>VE</td>
+                            <td>Venezuela, Bolivarian Republic of</td>
+                            <td>America/Caracas</td>
+                            <td>UTC -04:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Caracas')">Select</button></td>
+                        </tr>
+                        <tr><td>415</td>
+                            <td>VN</td>
+                            <td>Viet Nam</td>
+                            <td>Asia/Ho_Chi_Minh</td>
+                            <td>UTC +07:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Asia/Ho_Chi_Minh')">Select</button></td>
+                        </tr>
+                        <tr><td>416</td>
+                            <td>VG</td>
+                            <td>Virgin Islands, British</td>
+                            <td>America/Tortola</td>
+                            <td>UTC -04:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/Tortola')">Select</button></td>
+                        </tr>
+                        <tr><td>417</td>
+                            <td>VI</td>
+                            <td>Virgin Islands, U.S.</td>
+                            <td>America/St_Thomas</td>
+                            <td>UTC -04:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('America/St_Thomas')">Select</button></td>
+                        </tr>
+                        <tr><td>418</td>
+                            <td>WF</td>
+                            <td>Wallis and Futuna</td>
+                            <td>Pacific/Wallis</td>
+                            <td>UTC +12:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Pacific/Wallis')">Select</button></td>
+                        </tr>
+                        <tr><td>419</td>
+                            <td>EH</td>
+                            <td>Western Sahara</td>
+                            <td>Africa/El_Aaiun</td>
+                            <td>UTC</td>
+                            <td><button class="btn btn-primary" onclick="tz('Africa/El_Aaiun')">Select</button></td>
+                        </tr>
+                        <tr><td>420</td>
+                            <td>YE</td>
+                            <td>Yemen</td>
+                            <td>Asia/Aden</td>
+                            <td>UTC +03:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Asia/Aden')">Select</button></td>
+                        </tr>
+                        <tr><td>421</td>
+                            <td>ZM</td>
+                            <td>Zambia</td>
+                            <td>Africa/Lusaka</td>
+                            <td>UTC +02:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Africa/Lusaka')">Select</button></td>
+                        </tr>
+                        <tr><td>422</td>
+                            <td>ZW</td>
+                            <td>Zimbabwe</td>
+                            <td>Africa/Harare</td>
+                            <td>UTC +02:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Africa/Harare')">Select</button></td>
+                        </tr>
+                        <tr><td>423</td>
+                            <td>AX</td>
+                            <td>Åland Islands</td>
+                            <td>Europe/Mariehamn</td>
+                            <td>UTC +03:00</td>
+                            <td><button class="btn btn-primary" onclick="tz('Europe/Mariehamn')">Select</button></td>
+                        </tr>
+        </table>
+        </div>
+</body>
+
+</html>
